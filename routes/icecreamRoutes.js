@@ -5,6 +5,29 @@ const router = express.Router();
 // Importerar glass-modellen.
 const Icecream = require("../models/icecream");
 
+// Hämtar hela menyn med glassar.
+router.get("/icecreams", async (req, res) => {
+    try {
+        // Hämtar alla glassar.
+        const icecreams = await Icecream.find();
+
+        // Om inga glassar hittas...
+        if (!icecreams || icecreams.length === 0) {
+            return res.status(404).json({ error: "Inga glassar hittades." });
+        // Om glassar hittas...
+        } else {
+            // Returnerar lyckat svar i konsollen.
+            res.status(201).json({
+                message: "Menyn har hämtats!",
+                menu: icecreams
+            });
+        }
+    // Felmeddelande vid serverfel.
+    } catch (error) {
+        res.status(500).json({ error: "Serverfel...", details: error.message });
+    }
+});
+
 // Skapar/lagrar en ny glass.
 router.post("/icecreams", async (req, res) => {
     try {
@@ -28,6 +51,34 @@ router.post("/icecreams", async (req, res) => {
             res.status(201).json({
                 message: "Glassen lades till i databasen!",
                 icecream: newIcecream
+            });
+        }
+    // Felmeddelande vid serverfel.
+    } catch (error) {
+        res.status(500).json({ error: "Serverfel...", details: error.message });
+    }
+});
+
+// Uppdaterar en glass.
+router.put("/icecreams/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name, category, description } = req.body;
+
+        // Validerar inmatning av namn, kategori och beskrivning.
+        if (!name || !category || !description) {
+            return res.status(400).json({ error: "Namn, kategori och beskrivning behöver anges." });
+        }
+
+        // Kontrollerar om glassen finns och i så fall uppdateras den.
+        const updatedIcecream = await Icecream.findByIdAndUpdate(id, { name, category, description }, { new: true });
+        if (!updatedIcecream) {
+            return res.status(404).json({ error: "Glassen hittades inte." });
+        } else {
+            // Returnerar uppdaterad glass.
+            res.status(200).json({
+                message: "Glassen har uppdaterats!",
+                icecream: updatedIcecream
             });
         }
     // Felmeddelande vid serverfel.

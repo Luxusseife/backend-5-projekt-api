@@ -28,6 +28,8 @@ Den här README-filen har skapats för att förklara projektets syfte, redogöra
 11. I katalogen för models läggs en icecream.js-fil till i vilken det skapas struktur för glass-sorter i menyn med ett schema.
 12. I katalogen för routes läggs en icecreamRoutes.js-fil till i vilken glassmodellen importeras och routes för att skapa och lagra en ny glass görs med metoden POST. En route för att radera glassen från databasen/menyn görs också med metoden DELETE.
 13. Funktionalitet för att skapa och radera glass testas i ThunderClient och funktionalitet kan ses här samt i adminverktyget MongoDB Compass.
+14. Routes för att hämta hela glassmenyn och uppdatera enskilda glass-objekt läggs till och testas i ThunderClient varpå funktionaliteten bekräftas här och i MongoDb Compass.
+
 
 I koden implementeras **CRUD**; create (POST), read (GET), update (PUT) och delete (DELETE).
 
