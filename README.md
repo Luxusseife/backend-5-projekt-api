@@ -23,13 +23,15 @@ Den här README-filen har skapats för att förklara projektets syfte, redogöra
 6. En katalog för models skapas och häri läggs en admin.js-fil i vilken det skapas struktur för adminuppgifter med ett schema.
 7. En import av adminmodellen görs till adminRoutes.js-filen och i sektionen som avser registering läggs denna till med _new Admin_.
 8. En funktion som hashar lösenordet för samtliga registrerade användare läggs till i adminRoutes.js-filen.
-9. I admin.js-filen skapas funktioner för inloggning, kontroll/jämförelse av hashade lösenord samt kontroll av registrerat användarnamn. En JWT-token läggs också till som skapas vid lyckad inloggning.
+9. I admin.js-filen skapas funktioner för inloggning, kontroll/jämförelse av hashade lösenord samt kontroll av registrerat användarnamn. En JWT-token läggs också till som skapas vid lyckad inloggning. Adminroute importeras sen till server.js-filen.
 10. Funktionalitet för registrering och inloggning testas i ThunderClient och funktionalitet kan ses i adminverktyget MongoDB Compass.
 11. I katalogen för models läggs en icecream.js-fil till i vilken det skapas struktur för glass-sorter i menyn med ett schema.
-12. I katalogen för routes läggs en icecreamRoutes.js-fil till i vilken glassmodellen importeras och routes för att skapa och lagra en ny glass görs med metoden POST. En route för att radera glassen från databasen/menyn görs också med metoden DELETE.
+12. I katalogen för routes läggs en icecreamRoutes.js-fil till i vilken glassmodellen importeras och routes för att skapa och lagra en ny glass görs med metoden POST. En route för att radera glassen från databasen/menyn görs också med metoden DELETE. Route för glassmenyn importeras sen till server.js-filen.
 13. Funktionalitet för att skapa och radera glass testas i ThunderClient och funktionalitet kan ses här samt i adminverktyget MongoDB Compass.
 14. Routes för att hämta hela glassmenyn och uppdatera enskilda glass-objekt läggs till och testas i ThunderClient varpå funktionaliteten bekräftas här och i MongoDb Compass.
-
+15. I katalogen för models läggs en score.js-fil till i vilken det skapas struktur för besöksbetyg med ett schema.
+16. I katalogen för routes läggs en scoreRoutes.js-fil till i vilken betygsmodellen importeras och routes för att hämta, skapa och radera enskilda betyg görs med metoderna GET, POST och DELETE. Route för besöksbetyg importeras sen till server.js-filen.
+17. Funktionalitet för att hämta, skapa och radera besöksbetyg testas i ThunderClient och funktionalitet kan ses här samt i adminverktyget MongoDB Compass.
 
 I koden implementeras **CRUD**; create (POST), read (GET), update (PUT) och delete (DELETE).
 
@@ -43,8 +45,8 @@ admin åt det skyddade admin-gränssnittet.
 
 | **Metod** | **Endpoint**      | **Beskrivning**                                                                                                                      |
 |-------|---------------|----------------------------------------------------------------------------------------------------------------------------------|
-| POST  | /api/register | Lägger till ett nytt admin-konto. Kräver att ett objekt med användarnamn och lösenord skickas med.                               |
-| POST  | /api/login    | Loggar in admin och returnerar en JWT-token som är giltig i 1h. Kräver att ett objekt med användarnamn och lösenord skickas med. |
+| POST  | /admin/register | Lägger till ett nytt admin-konto. Kräver att ett objekt med användarnamn och lösenord skickas med.                               |
+| POST  | /admin/login    | Loggar in admin och returnerar en JWT-token som är giltig i 1h. Kräver att ett objekt med användarnamn och lösenord skickas med. |
 
 ### Output
 Ett admin-objekt returneras/skickas som JSON med följande struktur:
@@ -59,10 +61,12 @@ Ett admin-objekt returneras/skickas som JSON med följande struktur:
 ## Användning: meny
 Menyn kan hanteras av inloggad admin-personal via det skyddade admin-gränssnittet. 
 
-| **Metod**  | **Endpoint**         | **Beskrivning**                                                                                            |
-|--------|------------------|--------------------------------------------------------------------------------------------------------|
-| POST   | /api/icecreams   | Lägger till en ny glass i menyn. Kräver att ett objekt med namn, kategori och beskrivning skickas med. |
-| DELETE | /api/icreams/:id | raderar en glass från menyn. Kräver att glassens unika ID skickas med.                                 |
+| **Metod** | **Endpoint**   | **Beskrivning**                                                                                                                           |
+|-----------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| GET       | /icecreams     | Hämtar glassmenyn.                                                                                                                        |
+| POST      | /icecreams     | Lägger till en ny glass i menyn. Kräver att ett objekt med namn, kategori, beskrivning och pris skickas med.                              |
+| PUT       | /icecreams/:id | Uppdaterar en glass i menyn. Kräver att glassens unika ID anges samt att ett objekt med namn, kategori, beskrivning och pris skickas med. |
+| DELETE    | /icecreams/:id | Raderar en glass från menyn. Kräver att glassens unika ID skickas med.    
 
 ### Output
 Ett meny-objekt returneras/skickas som JSON med följande struktur:
@@ -71,7 +75,27 @@ Ett meny-objekt returneras/skickas som JSON med följande struktur:
 {
    "name": "Chocolate Chock",
    "category": "Kaffe och choklad",
-   "description": "Chokladgräddglass med bitar av mörk choklad och chokladsås."
+   "description": "Chokladgräddglass med bitar av mörk choklad och chokladsås.",
+   "price": "29KR"
+}
+```
+
+## Användning: besöksbetyg
+Besöksbetygen kan hanteras av inloggad admin-personal via det skyddade admin-gränssnittet. 
+
+| **Metod** | **Endpoint** | **Beskrivning**                                                                               |
+|-----------|--------------|-----------------------------------------------------------------------------------------------|
+| GET       | /scores      | Hämtar alla besöksbetyg.                                                                      |
+| POST      | /scores      | Lägger till ett nytt besöksbetyg. Kräver att ett objekt med betyg (1-5) och namn skickas med. |
+| DELETE    | /scores/:id  | Raderar ett besöksbetyg. Kräver att betygets unika ID skickas med.                            |                          |                                                                         |
+
+### Output
+Ett betyg-objekt returneras/skickas som JSON med följande struktur:
+
+```
+{
+   "score": 5,
+   "name": "Jenny Lind"
 }
 ```
 

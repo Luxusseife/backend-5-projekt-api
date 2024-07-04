@@ -27,12 +27,14 @@ mongoose.connect(process.env.DATABASE)
 });
 
 // Importerar routes.
-const adminRoutes = require('./routes/adminRoutes');
-const icecreamRoutes = require('./routes/icecreamRoutes');
+const adminRoutes = require("./routes/adminRoutes");
+const icecreamRoutes = require("./routes/icecreamRoutes");
+const scoreRoutes = require("./routes/scoreRoutes");
 
 // Routes.
-app.use("/api", adminRoutes);
-app.use("/api", icecreamRoutes);
+app.use("/admin", adminRoutes);
+app.use("/icecreams", icecreamRoutes);
+app.use("/scores", scoreRoutes);
 
 // Startar applikation.
 app.listen(port, () => {

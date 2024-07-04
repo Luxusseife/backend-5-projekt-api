@@ -6,7 +6,7 @@ const router = express.Router();
 const Icecream = require("../models/icecream");
 
 // Hämtar hela menyn med glassar.
-router.get("/icecreams", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         // Hämtar alla glassar.
         const icecreams = await Icecream.find();
@@ -17,7 +17,7 @@ router.get("/icecreams", async (req, res) => {
         // Om glassar hittas...
         } else {
             // Returnerar lyckat svar i konsollen.
-            res.status(201).json({
+            res.status(200).json({
                 message: "Menyn har hämtats!",
                 menu: icecreams
             });
@@ -29,13 +29,13 @@ router.get("/icecreams", async (req, res) => {
 });
 
 // Skapar/lagrar en ny glass.
-router.post("/icecreams", async (req, res) => {
+router.post("/", async (req, res) => {
     try {
-        const { name, category, description } = req.body;
+        const { name, category, description, price } = req.body;
 
         // Validerar inmatning av namn, kategori och beskrivning.
-        if (!name || !category || !description) {
-            return res.status(400).json({ error: "Namn, kategori och beskrivning behöver anges." });
+        if (!name || !category || !description || !price) {
+            return res.status(400).json({ error: "Namn, kategori, beskrivning och pris behöver anges." });
         }
 
         // Kontrollerar om glassen redan finns lagrad.
@@ -44,7 +44,7 @@ router.post("/icecreams", async (req, res) => {
             return res.status(400).json({ error: "Denna glass är redan lagrad i databasen." });
         } else {
             // Skapar en ny glass-instans.
-            const newIcecream = new Icecream({ name, category, description });
+            const newIcecream = new Icecream({ name, category, description, price });
             await newIcecream.save();
 
             // Returnerar lyckat svar i konsollen.
@@ -60,18 +60,18 @@ router.post("/icecreams", async (req, res) => {
 });
 
 // Uppdaterar en glass.
-router.put("/icecreams/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, category, description } = req.body;
+        const { name, category, description, price } = req.body;
 
         // Validerar inmatning av namn, kategori och beskrivning.
-        if (!name || !category || !description) {
-            return res.status(400).json({ error: "Namn, kategori och beskrivning behöver anges." });
+        if (!name || !category || !description || !price) {
+            return res.status(400).json({ error: "Namn, kategori, beskrivning och pris behöver anges." });
         }
 
         // Kontrollerar om glassen finns och i så fall uppdateras den.
-        const updatedIcecream = await Icecream.findByIdAndUpdate(id, { name, category, description }, { new: true });
+        const updatedIcecream = await Icecream.findByIdAndUpdate(id, { name, category, description, price }, { new: true });
         if (!updatedIcecream) {
             return res.status(404).json({ error: "Glassen hittades inte." });
         } else {
@@ -88,7 +88,7 @@ router.put("/icecreams/:id", async (req, res) => {
 });
 
 // Raderar en glass.
-router.delete("/icecreams/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
     try {
         const { id } = req.params;
 
