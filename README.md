@@ -1,4 +1,4 @@
-# Moment 5, _PROJEKT_
+# Moment 5, _PROJEKT, webbtjänst_
 Den här README-filen har skapats för att förklara projektets syfte, redogöra för arbetsprocessen i olika steg samt beskriva installationen och användningen av webbtjänsten.
 
 ## Projektets syfte
