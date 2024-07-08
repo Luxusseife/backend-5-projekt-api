@@ -1,19 +1,20 @@
 // Inkluderar Mongoose.
 const mongoose = require('mongoose');
 
-// Sätter struktur för olika glass-sorter med ett schema.
+// Sätter struktur för olika glass-sorter.
 const icecreamSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
+        unique: true
     },
     category: {
         type: String,
-        required: true,
+        required: true
     },
     description: {
         type: String,
-        required: true,
+        required: true
     },
     price: {
         type: String,

@@ -33,7 +33,7 @@ router.post("/", async (req, res) => {
     try {
         const { name, category, description, price } = req.body;
 
-        // Validerar inmatning av namn, kategori och beskrivning.
+        // Validerar inmatning av namn, kategori, beskrivning och pris.
         if (!name || !category || !description || !price) {
             return res.status(400).json({ error: "Namn, kategori, beskrivning och pris behöver anges." });
         }

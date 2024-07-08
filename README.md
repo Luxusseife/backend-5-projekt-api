@@ -22,8 +22,8 @@ Den här README-filen har skapats för att förklara projektets syfte, redogöra
 5. Routes för registrering och inloggning testas i ThunderClient för att säkerställa att dessa fungerar.
 6. En katalog för models skapas och häri läggs en admin.js-fil i vilken det skapas struktur för adminuppgifter med ett schema.
 7. En import av adminmodellen görs till adminRoutes.js-filen och i sektionen som avser registering läggs denna till med _new Admin_.
-8. En funktion som hashar lösenordet för samtliga registrerade användare läggs till i adminRoutes.js-filen.
-9. I admin.js-filen skapas funktioner för inloggning, kontroll/jämförelse av hashade lösenord samt kontroll av registrerat användarnamn. En JWT-token läggs också till som skapas vid lyckad inloggning. Adminroute importeras sen till server.js-filen.
+8. En funktion som hashar lösenordet för samtliga registrerade användare läggs till i adminRoutes.js-filen. En JWT-token läggs också till som skapas vid lyckad inloggning.
+9. I admin.js-filen skapas funktioner för inloggning, kontroll/jämförelse av hashade lösenord samt kontroll av registrerat användarnamn.  Adminroute importeras sen till server.js-filen.
 10. Funktionalitet för registrering och inloggning testas i ThunderClient och funktionalitet kan ses i adminverktyget MongoDB Compass.
 11. I katalogen för models läggs en icecream.js-fil till i vilken det skapas struktur för glass-sorter i menyn med ett schema.
 12. I katalogen för routes läggs en icecreamRoutes.js-fil till i vilken glassmodellen importeras och routes för att skapa och lagra en ny glass görs med metoden POST. En route för att radera glassen från databasen/menyn görs också med metoden DELETE. Route för glassmenyn importeras sen till server.js-filen.
