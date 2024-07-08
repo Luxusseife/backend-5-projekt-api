@@ -49,13 +49,15 @@ admin åt det skyddade admin-gränssnittet.
 | POST  | /admin/login    | Loggar in admin och returnerar en JWT-token som är giltig i 1h. Kräver att ett objekt med användarnamn och lösenord skickas med. |
 
 ### Output
-Ett admin-objekt returneras/skickas som JSON med följande struktur:
+Ett admin-objekt returneras/skickas som JSON med följande struktur där ID genereras automatiskt:
 
 ```
 {
+   "_id": "667153cafe0678db7c81feff",
    "username": "admin",
    "password": "password"
 }
+
 ```
 
 ## Användning: meny
@@ -69,15 +71,17 @@ Menyn kan hanteras av inloggad admin-personal via det skyddade admin-gränssnitt
 | DELETE    | /icecreams/:id | Raderar en glass från menyn. Kräver att glassens unika ID skickas med.    
 
 ### Output
-Ett meny-objekt returneras/skickas som JSON med följande struktur:
+Ett meny-objekt returneras/skickas som JSON med följande struktur där ID genereras automatiskt:
 
 ```
 {
+   "_id": "66867860a08a6762340c4459",
    "name": "Chocolate Chock",
    "category": "Kaffe och choklad",
    "description": "Chokladgräddglass med bitar av mörk choklad och chokladsås.",
    "price": "29KR"
 }
+
 ```
 
 ## Användning: besöksbetyg
@@ -90,13 +94,16 @@ Besöksbetygen kan hanteras av inloggad admin-personal via det skyddade admin-gr
 | DELETE    | /scores/:id  | Raderar ett besöksbetyg. Kräver att betygets unika ID skickas med.                            |                          |                                                                         |
 
 ### Output
-Ett betyg-objekt returneras/skickas som JSON med följande struktur:
+Ett betyg-objekt returneras/skickas som JSON med följande struktur där ID och datum genereras automatiskt:
 
 ```
 {
+   "_id": "668c245613746a1d9bb50ba5",
    "score": 5,
-   "name": "Jenny Lind"
+   "name": "Jenny Lind",
+   "date": "2024-07-08T17:39:34.753Z"
 }
+
 ```
 
 #### _Skapad av Jenny Lind, jeli2308_.
