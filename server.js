@@ -12,7 +12,7 @@ const app = express();
 const port = process.env.PORT || 3131;
 
 // Statiska filer.
-app.use(express.static("src"))
+app.use(express.static("dist"));
 
 // Middleware. Aktiverar Cors samt hantering och parsning av JSON-data.
 app.use(cors());
