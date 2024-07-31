@@ -32,6 +32,7 @@ Den här README-filen har skapats för att förklara projektets syfte, redogöra
 15. I katalogen för models läggs en score.js-fil till i vilken det skapas struktur för besöksbetyg med ett schema.
 16. I katalogen för routes läggs en scoreRoutes.js-fil till i vilken betygsmodellen importeras och routes för att hämta, skapa och radera enskilda betyg görs med metoderna GET, POST och DELETE. Route för besöksbetyg importeras sen till server.js-filen.
 17. Funktionalitet för att hämta, skapa och radera besöksbetyg testas i ThunderClient och funktionalitet kan ses här samt i adminverktyget MongoDB Compass.
+18. Via MongoDB Atlas ändras access till databasen så att databasen kan nås ifrån vilken IP-adress som helst och webbtjänsten publiceras på Render med angivna miljövariabler.  
 
 I koden implementeras **CRUD**; create (POST), read (GET), update (PUT) och delete (DELETE).
 
