@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
         // Om inga glassar hittas...
         if (!icecreams || icecreams.length === 0) {
             return res.status(404).json({ error: "Inga glassar hittades." });
-        // Om glassar hittas...
+            // Om glassar hittas...
         } else {
             // Returnerar lyckat svar i konsollen.
             res.status(200).json({
@@ -22,6 +22,32 @@ router.get("/", async (req, res) => {
                 menu: icecreams
             });
         }
+    // Felmeddelande vid serverfel.
+    } catch (error) {
+        res.status(500).json({ error: "Serverfel...", details: error.message });
+    }
+});
+
+// Hämtar en specifik glass baserat på ID.
+router.get("/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Hämtar en specifik glass med unikt ID.
+        const icecream = await Icecream.findById(id);
+
+        // Om glassen inte hittas...
+        if (!icecream) {
+            return res.status(404).json({ error: "Glassen hittades inte." });
+        // Om glassen hittas...
+        } else {
+            // Returnerar lyckat svar i konsollen.
+            res.status(200).json({
+                message: "Glassen har hämtats!",
+                icecream: icecream
+            });
+        }
+
     // Felmeddelande vid serverfel.
     } catch (error) {
         res.status(500).json({ error: "Serverfel...", details: error.message });
