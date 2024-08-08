@@ -68,8 +68,10 @@ Menyn kan hanteras av inloggad admin-personal via det skyddade admin-gränssnitt
 |-----------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | GET       | /icecreams     | Hämtar glassmenyn.                                                                                                                        |
 | POST      | /icecreams     | Lägger till en ny glass i menyn. Kräver att ett objekt med namn, kategori, beskrivning och pris skickas med.                              |
+| GET       | /icecreams/:id | Hämtar en glass i menyn. Kräver att glassens unika ID skickas med.                                                                        |
 | PUT       | /icecreams/:id | Uppdaterar en glass i menyn. Kräver att glassens unika ID anges samt att ett objekt med namn, kategori, beskrivning och pris skickas med. |
-| DELETE    | /icecreams/:id | Raderar en glass från menyn. Kräver att glassens unika ID skickas med.    
+| DELETE    | /icecreams/:id | Raderar en glass från menyn. Kräver att glassens unika ID skickas med.                                                                    |
+   
 
 ### Output
 Ett meny-objekt returneras/skickas som JSON med följande struktur där ID genereras automatiskt:
